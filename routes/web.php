@@ -11,13 +11,39 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'FrontendController@index')->name('index');
+
+Route::get('/post/{slug}', 'FrontendController@single')->name('post.single');
+
+Route::get('/category/{id}', 'FrontendController@category')->name('category.single');
+
+Route::get('/tag/{id}', 'FrontendController@tag')->name('tag.single');
+
+Route::get('/results', function() {
+    $posts = \App\Post::where('title', 'like', '%' . request('query') . '%')->get();
+    
+    return view('results', [
+        'posts' => $posts,
+        'title' => 'Search result : ' . request('query'),
+        'setting' => \App\Setting::first(),
+        'categories' => \App\Category::all()->take(5)
+    ]);
 });
+
+
+Route::post('/subscribe', function() {
+    $email = request('email');
+    
+    
+    Newsletter::subscribe($email);    
+
+    Session::flash('subscribed', 'Successfully subscribed');
+    return redirect()->back();
+});
+
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('posts', 'PostsController');
 
@@ -30,6 +56,8 @@ Route::resource('users', 'UsersController');
 Route::resource('profiles', 'ProfileController');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
+    Route::get('/dashboard', 'HomeController@index')->name('admin.dashboard');
+
     Route::get('/posts/trashed', 'PostsController@trashed')->name('posts.trashed');
     Route::get('/posts/kill/{id}', 'PostsController@kill')->name('posts.kill');
     Route::get('/posts/restore/{id}', 'PostsController@restore')->name('posts.restore');
@@ -39,4 +67,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
     Route::get('/settings', 'SettingController@index')->name('settings.index');
     Route::post('/settings/update', 'SettingController@update')->name('settings.update');
+});
+
+
+Route::get('/{page}', function() {
+    return redirect()->route('index');
 });

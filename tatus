@@ -1,0 +1,489 @@
+[1mdiff --git a/app/Category.php b/app/Category.php[m
+[1mdeleted file mode 100644[m
+[1mindex e90a070..0000000[m
+[1m--- a/app/Category.php[m
+[1m+++ /dev/null[m
+[36m@@ -1,12 +0,0 @@[m
+[31m-<?php[m
+[31m-[m
+[31m-namespace App;[m
+[31m-[m
+[31m-use Illuminate\Database\Eloquent\Model;[m
+[31m-[m
+[31m-class Category extends Model[m
+[31m-{[m
+[31m-    public function posts() {[m
+[31m-      return $this->hasMany('App\Post');[m
+[31m-    }[m
+[31m-}[m
+[1mdiff --git a/app/Console/Kernel.php b/app/Console/Kernel.php[m
+[1mdeleted file mode 100644[m
+[1mindex a8c5158..0000000[m
+[1m--- a/app/Console/Kernel.php[m
+[1m+++ /dev/null[m
+[36m@@ -1,42 +0,0 @@[m
+[31m-<?php[m
+[31m-[m
+[31m-namespace App\Console;[m
+[31m-[m
+[31m-use Illuminate\Console\Scheduling\Schedule;[m
+[31m-use Illuminate\Foundation\Console\Kernel as ConsoleKernel;[m
+[31m-[m
+[31m-class Kernel extends ConsoleKernel[m
+[31m-{[m
+[31m-    /**[m
+[31m-     * The Artisan commands provided by your application.[m
+[31m-     *[m
+[31m-     * @var array[m
+[31m-     */[m
+[31m-    protected $commands = [[m
+[31m-        //[m
+[31m-    ];[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Define the application's command schedule.[m
+[31m-     *[m
+[31m-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule[m
+[31m-     * @return void[m
+[31m-     */[m
+[31m-    protected function schedule(Schedule $schedule)[m
+[31m-    {[m
+[31m-        // $schedule->command('inspire')[m
+[31m-        //          ->hourly();[m
+[31m-    }[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Register the commands for the application.[m
+[31m-     *[m
+[31m-     * @return void[m
+[31m-     */[m
+[31m-    protected function commands()[m
+[31m-    {[m
+[31m-        $this->load(__DIR__.'/Commands');[m
+[31m-[m
+[31m-        require base_path('routes/console.php');[m
+[31m-    }[m
+[31m-}[m
+[1mdiff --git a/app/Exceptions/Handler.php b/app/Exceptions/Handler.php[m
+[1mdeleted file mode 100644[m
+[1mindex 7e2563a..0000000[m
+[1m--- a/app/Exceptions/Handler.php[m
+[1m+++ /dev/null[m
+[36m@@ -1,53 +0,0 @@[m
+[31m-<?php[m
+[31m-[m
+[31m-namespace App\Exceptions;[m
+[31m-[m
+[31m-use Exception;[m
+[31m-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;[m
+[31m-[m
+[31m-class Handler extends ExceptionHandler[m
+[31m-{[m
+[31m-    /**[m
+[31m-     * A list of the exception types that are not reported.[m
+[31m-     *[m
+[31m-     * @var array[m
+[31m-     */[m
+[31m-    protected $dontReport = [[m
+[31m-        //[m
+[31m-    ];[m
+[31m-[m
+[31m-    /**[m
+[31m-     * A list of the inputs that are never flashed for validation exceptions.[m
+[31m-     *[m
+[31m-     * @var array[m
+[31m-     */[m
+[31m-    protected $dontFlash = [[m
+[31m-        'password',[m
+[31m-        'password_confirmation',[m
+[31m-    ];[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Report or log an exception.[m
+[31m-     *[m
+[31m-     * This is a great spot to send exceptions to Sentry, Bugsnag, etc.[m
+[31m-     *[m
+[31m-     * @param  \Exception  $exception[m
+[31m-     * @return void[m
+[31m-     */[m
+[31m-    public function report(Exception $exception)[m
+[31m-    {[m
+[31m-        parent::report($exception);[m
+[31m-    }[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Render an exception into an HTTP response.[m
+[31m-     *[m
+[31m-     * @param  \Illuminate\Http\Request  $request[m
+[31m-     * @param  \Exception  $exception[m
+[31m-     * @return \Illuminate\Http\Response[m
+[31m-     */[m
+[31m-    public function render($request, Exception $exception)[m
+[31m-    {[m
+[31m-        return parent::render($request, $exception);[m
+[31m-    }[m
+[31m-}[m
+[1mdiff --git a/app/Http/Controllers/Auth/ForgotPasswordController.php b/app/Http/Controllers/Auth/ForgotPasswordController.php[m
+[1mdeleted file mode 100644[m
+[1mindex 6a247fe..0000000[m
+[1m--- a/app/Http/Controllers/Auth/ForgotPasswordController.php[m
+[1m+++ /dev/null[m
+[36m@@ -1,32 +0,0 @@[m
+[31m-<?php[m
+[31m-[m
+[31m-namespace App\Http\Controllers\Auth;[m
+[31m-[m
+[31m-use App\Http\Controllers\Controller;[m
+[31m-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;[m
+[31m-[m
+[31m-class ForgotPasswordController extends Controller[m
+[31m-{[m
+[31m-    /*[m
+[31m-    |--------------------------------------------------------------------------[m
+[31m-    | Password Reset Controller[m
+[31m-    |--------------------------------------------------------------------------[m
+[31m-    |[m
+[31m-    | This controller is responsible for handling password reset emails and[m
+[31m-    | includes a trait which assists in sending these notifications from[m
+[31m-    | your application to your users. Feel free to explore this trait.[m
+[31m-    |[m
+[31m-    */[m
+[31m-[m
+[31m-    use SendsPasswordResetEmails;[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Create a new controller instance.[m
+[31m-     *[m
+[31m-     * @return void[m
+[31m-     */[m
+[31m-    public function __construct()[m
+[31m-    {[m
+[31m-        $this->middleware('guest');[m
+[31m-    }[m
+[31m-}[m
+[1mdiff --git a/app/Http/Controllers/Auth/LoginController.php b/app/Http/Controllers/Auth/LoginController.php[m
+[1mdeleted file mode 100644[m
+[1mindex b2ea669..0000000[m
+[1m--- a/app/Http/Controllers/Auth/LoginController.php[m
+[1m+++ /dev/null[m
+[36m@@ -1,39 +0,0 @@[m
+[31m-<?php[m
+[31m-[m
+[31m-namespace App\Http\Controllers\Auth;[m
+[31m-[m
+[31m-use App\Http\Controllers\Controller;[m
+[31m-use Illuminate\Foundation\Auth\AuthenticatesUsers;[m
+[31m-[m
+[31m-class LoginController extends Controller[m
+[31m-{[m
+[31m-    /*[m
+[31m-    |--------------------------------------------------------------------------[m
+[31m-    | Login Controller[m
+[31m-    |--------------------------------------------------------------------------[m
+[31m-    |[m
+[31m-    | This controller handles authenticating users for the application and[m
+[31m-    | redirecting them to your home screen. The controller uses a trait[m
+[31m-    | to conveniently provide its functionality to your applications.[m
+[31m-    |[m
+[31m-    */[m
+[31m-[m
+[31m-    use AuthenticatesUsers;[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Where to redirect users after login.[m
+[31m-     *[m
+[31m-     * @var string[m
+[31m-     */[m
+[31m-    protected $redirectTo = '/home';[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Create a new controller instance.[m
+[31m-     *[m
+[31m-     * @return void[m
+[31m-     */[m
+[31m-    public function __construct()[m
+[31m-    {[m
+[31m-        $this->middleware('guest')->except('logout');[m
+[31m-    }[m
+[31m-}[m
+[1mdiff --git a/app/Http/Controllers/Auth/RegisterController.php b/app/Http/Controllers/Auth/RegisterController.php[m
+[1mdeleted file mode 100644[m
+[1mindex e749c07..0000000[m
+[1m--- a/app/Http/Controllers/Auth/RegisterController.php[m
+[1m+++ /dev/null[m
+[36m@@ -1,72 +0,0 @@[m
+[31m-<?php[m
+[31m-[m
+[31m-namespace App\Http\Controllers\Auth;[m
+[31m-[m
+[31m-use App\User;[m
+[31m-use App\Http\Controllers\Controller;[m
+[31m-use Illuminate\Support\Facades\Hash;[m
+[31m-use Illuminate\Support\Facades\Validator;[m
+[31m-use Illuminate\Foundation\Auth\RegistersUsers;[m
+[31m-[m
+[31m-class RegisterController extends Controller[m
+[31m-{[m
+[31m-    /*[m
+[31m-    |--------------------------------------------------------------------------[m
+[31m-    | Register Controller[m
+[31m-    |--------------------------------------------------------------------------[m
+[31m-    |[m
+[31m-    | This controller handles the registration of new users as well as their[m
+[31m-    | validation and creation. By default this controller uses a trait to[m
+[31m-    | provide this functionality without requiring any additional code.[m
+[31m-    |[m
+[31m-    */[m
+[31m-[m
+[31m-    use RegistersUsers;[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Where to redirect users after registration.[m
+[31m-     *[m
+[31m-     * @var string[m
+[31m-     */[m
+[31m-    protected $redirectTo = '/home';[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Create a new controller instance.[m
+[31m-     *[m
+[31m-     * @return void[m
+[31m-     */[m
+[31m-    public function __construct()[m
+[31m-    {[m
+[31m-        $this->middleware('guest');[m
+[31m-    }[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Get a validator for an incoming registration request.[m
+[31m-     *[m
+[31m-     * @param  array  $data[m
+[31m-     * @return \Illuminate\Contracts\Validation\Validator[m
+[31m-     */[m
+[31m-    protected function validator(array $data)[m
+[31m-    {[m
+[31m-        return Validator::make($data, [[m
+[31m-            'name' => 'required|string|max:255',[m
+[31m-            'email' => 'required|string|email|max:255|unique:users',[m
+[31m-            'password' => 'required|string|min:6|confirmed',[m
+[31m-        ]);[m
+[31m-    }[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Create a new user instance after a valid registration.[m
+[31m-     *[m
+[31m-     * @param  array  $data[m
+[31m-     * @return \App\User[m
+[31m-     */[m
+[31m-    protected function create(array $data)[m
+[31m-    {[m
+[31m-        return User::create([[m
+[31m-            'name' => $data['name'],[m
+[31m-            'email' => $data['email'],[m
+[31m-            'password' => Hash::make($data['password']),[m
+[31m-        ]);[m
+[31m-    }[m
+[31m-}[m
+[1mdiff --git a/app/Http/Controllers/Auth/ResetPasswordController.php b/app/Http/Controllers/Auth/ResetPasswordController.php[m
+[1mdeleted file mode 100644[m
+[1mindex cf726ee..0000000[m
+[1m--- a/app/Http/Controllers/Auth/ResetPasswordController.php[m
+[1m+++ /dev/null[m
+[36m@@ -1,39 +0,0 @@[m
+[31m-<?php[m
+[31m-[m
+[31m-namespace App\Http\Controllers\Auth;[m
+[31m-[m
+[31m-use App\Http\Controllers\Controller;[m
+[31m-use Illuminate\Foundation\Auth\ResetsPasswords;[m
+[31m-[m
+[31m-class ResetPasswordController extends Controller[m
+[31m-{[m
+[31m-    /*[m
+[31m-    |--------------------------------------------------------------------------[m
+[31m-    | Password Reset Controller[m
+[31m-    |--------------------------------------------------------------------------[m
+[31m-    |[m
+[31m-    | This controller is responsible for handling password reset requests[m
+[31m-    | and uses a simple trait to include this behavior. You're free to[m
+[31m-    | explore this trait and override any methods you wish to tweak.[m
+[31m-    |[m
+[31m-    */[m
+[31m-[m
+[31m-    use ResetsPasswords;[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Where to redirect users after resetting their password.[m
+[31m-     *[m
+[31m-     * @var string[m
+[31m-     */[m
+[31m-    protected $redirectTo = '/home';[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Create a new controller instance.[m
+[31m-     *[m
+[31m-     * @return void[m
+[31m-     */[m
+[31m-    public function __construct()[m
+[31m-    {[m
+[31m-        $this->middleware('guest');[m
+[31m-    }[m
+[31m-}[m
+[1mdiff --git a/app/Http/Controllers/CategoryController.php b/app/Http/Controllers/CategoryController.php[m
+[1mdeleted file mode 100644[m
+[1mindex 84107e9..0000000[m
+[1m--- a/app/Http/Controllers/CategoryController.php[m
+[1m+++ /dev/null[m
+[36m@@ -1,111 +0,0 @@[m
+[31m-<?php[m
+[31m-[m
+[31m-namespace App\Http\Controllers;[m
+[31m-[m
+[31m-use Illuminate\Http\Request;[m
+[31m-use Illuminate\Support\Facades\Session;[m
+[31m-use App\Category;[m
+[31m-[m
+[31m-class CategoryController extends Controller[m
+[31m-{[m
+[31m-    public function __construct() {[m
+[31m-        $this->middleware('auth');[m
+[31m-    }[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Display a listing of the resource.[m
+[31m-     *[m
+[31m-     * @return \Illuminate\Http\Response[m
+[31m-     */[m
+[31m-    public function index()[m
+[31m-    {[m
+[31m-        return view('admin.categories.index')->with('categories', Category::all());[m
+[31m-    }[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Show the form for creating a new resource.[m
+[31m-     *[m
+[31m-     * @return \Illuminate\Http\Response[m
+[31m-     */[m
+[31m-    public function create()[m
+[31m-    {[m
+[31m-        return view('admin.categories.create');[m
+[31m-[m
+[31m-    }[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Store a newly created resource in storage.[m
+[31m-     *[m
+[31m-     * @param  \Illuminate\Http\Request  $request[m
+[31m-     * @return \Illuminate\Http\Response[m
+[31m-     */[m
+[31m-    public function store(Request $request)[m
+[31m-    {[m
+[31m-        $category = new Category;[m
+[31m-        $category->name = $request->name;[m
+[31m-        $category->save();[m
+[31m-[m
+[31m-        $request->session()->flash('success', 'You successfully add a new category');[m
+[31m-        return redirect()->route('categories.index');[m
+[31m-    }[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Display the specified resource.[m
+[31m-     *[m
+[31m-     * @param  int  $id[m
+[31m-     * @return \Illuminate\Http\Response[m
+[31m-     */[m
+[31m-    public function show($id)[m
+[31m-    {[m
+[31m-[m
+[31m-    }[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Show the form for editing the specified resource.[m
+[31m-     *[m
+[31m-     * @param  int  $id[m
+[31m-     * @return \Illuminate\Http\Response[m
+[31m-     */[m
+[31m-    public function edit($id)[m
+[31m-    {[m
+[31m-        return view('admin.categories.edit')->with('category', Category::find($id));[m
+[31m-    }[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Update the specified resource in storage.[m
+[31m-     *[m
+[31m-     * @param  \Illuminate\Http\Request  $request[m
+[31m-     * @param  int  $id[m
+[31m-     * @return \Illuminate\Http\Response[m
+[31m-     * [m
+[31m-     */[m
+[31m-    public function update(Request $request, $id)[m
+[31m-    {[m
+[31m-        $category = Category::find($id);[m
+[31m-        $category->name = $request->name;[m
+[31m-        $category->save();[m
+[31m-[m
+[31m-        $request->session()->flash('success', 'You successfully edit the category');[m
+[31m-        return redirect()->route('categories.index');[m
+[31m-    }[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Remove the specified resource from storage.[m
+[31m-     *[m
+[31m-     * @param  int  $id[m
+[31m-     * @return \Illuminate\Http\Response[m
+[31m-     */[m
+[31m-    public function destroy($id)[m
+[31m-    {[m
+[31m-        $category = Category::find($id);[m
+[31m-[m
+[31m-        foreach ($category->posts as $post) {[m
+[31m-            $post->forceDelete();[m
+[31m-        }[m
+[31m-[m
+[31m-        $category->delete();[m
+[31m-[m
+[31m-        Session::flash('success', 'You successfully delete the category');[m
+[31m-        return redirect()->route('categories.index');[m
+[31m-    }[m
+[31m-}[m
+[1mdiff --git a/app/Http/Controllers/Controller.php b/app/Http/Controllers/Controller.php[m
+[1mdeleted file mode 100644[m
+[1mindex 03e02a2..0000000[m
+[1m--- a/app/Http/Controllers/Controller.php[m
+[1m+++ /dev/null[m
+[36m@@ -1,13 +0,0 @@[m
+[31m-<?php[m
+[31m-[m
+[31m-namespace App\Http\Controllers;[m
+[31m-[m
+[31m-use Illuminate\Foundation\Bus\DispatchesJobs;[m
+[31m-use Illuminate\Routing\Controller as BaseController;[m
+[31m-use Illuminate\Foundation\Validation\ValidatesRequests;[m
+[31m-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;[m
+[31m-[m
+[31m-class Controller extends BaseController[m
+[31m-{[m
+[31m-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;[m
+[31m-}[m
+[1mdiff --git a/app/Http/Controllers/HomeController.php b/app/Http/Controllers/HomeController.php[m
+[1mdeleted file mode 100644[m
+[1mindex a3af7dd..0000000[m
+[1m--- a/app/Http/Controllers/HomeController.php[m
+[1m+++ /dev/null[m
+[36m@@ -1,28 +0,0 @@[m
+[31m-<?php[m
+[31m-[m
+[31m-namespace App\Http\Controllers;[m
+[31m-[m
+[31m-use Illuminate\Http\Request;[m
+[31m-[m
+[31m-class HomeController extends Controller[m
+[31m-{[m
+[31m-    /**[m
+[31m-     * Create a new controller instance.[m
+[31m-     *[m
+[31m-     * @return void[m
+[31m-     */[m
+[31m-    public function __construct()[m
+[31m-    {[m
+[

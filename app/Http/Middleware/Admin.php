@@ -18,10 +18,10 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if(!Auth::user()->admin)
+        if(!Auth::user() || !Auth::user()->admin)
         {
             Session::flash('info', 'You do not have permissions to perform this action');
-            return redirect()->route('home');
+            return redirect()->route('index');
         }
 
         return $next($request);

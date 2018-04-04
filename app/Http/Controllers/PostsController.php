@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 use App\Post;
 use App\Category;
 use App\Tag;
+use Auth;
 
 
 class PostsController extends Controller
@@ -23,7 +24,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return view('admin.posts.index')->with('posts', Post::all());
+        return view('admin.posts.index')->with('posts', Post::orderBy('created_at', 'desc')->get());
     }
 
     /**
@@ -75,7 +76,8 @@ class PostsController extends Controller
             'featured' => $featured_path,
             'content' => $request->content,
             'category_id' => $request->category_id,
-            'slug' => str_slug($request->title)
+            'slug' => str_slug($request->title),
+            'user_id' => Auth::id()
         ]);
         
         $post->tags()->attach($request->tags);
